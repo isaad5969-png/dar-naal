@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useLangStore } from './stores/langStore'
 import Navbar from './components/ui/Navbar'
@@ -31,7 +31,7 @@ export default function App() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Public */}
         <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
@@ -50,6 +50,6 @@ export default function App() {
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
