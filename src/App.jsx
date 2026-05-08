@@ -15,7 +15,7 @@ import OwnerHotspots from './pages/owner/OwnerHotspots'
 
 function PublicLayout({ children }) {
   return (
-    <div className="min-h-screen" style={{ background: '#f8f1e5' }}>
+    <div className="min-h-screen" style={{ background: '#FAF7F2' }}>
       <Navbar />
       <main>{children}</main>
     </div>

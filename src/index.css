@@ -1,162 +1,279 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background: #f8f1e5;
-    color: #1a1612;
-    font-family: system-ui, -apple-system, sans-serif;
-    margin: 0;
+    background: #FAF7F2;
+    color: #1C1C1A;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
 }
 
 @layer components {
-  .section-shell {
+
+  /* ─── Layout ─────────────────────────────────── */
+  .container-xl {
+    max-width: 1280px;
     margin: 0 auto;
-    max-width: 80rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 2rem;
+    padding: 0 2rem;
   }
 
-  .panel-surface {
-    border-radius: 30px;
-    border: 1px solid #e8dfc8;
-    background: rgba(255,255,255,0.92);
-    box-shadow: 0 2px 12px rgba(80,50,20,0.07);
-    backdrop-filter: blur(8px);
-  }
-
-  .pill-badge {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    background: #f2e8d4;
-    padding: 4px 12px;
+  /* ─── Info bar ───────────────────────────────── */
+  .info-bar {
+    background: #FAF7F2;
+    border-bottom: 1px solid #E8E0D4;
+    padding: 8px 0;
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
+    font-weight: 500;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #b05c3a;
+    color: #5A5248;
   }
 
-  .product-badge {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    border: 1px solid #e8dfc8;
-    background: #faf6ee;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 500;
-    color: #5a4a3a;
+  /* ─── Header ─────────────────────────────────── */
+  .site-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid #E8E0D4;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
-  .public-btn-primary,
-  .primary-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: #b05c3a;
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background 0.15s;
+  /* ─── Nav link ───────────────────────────────── */
+  .nav-link {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #1C1C1A;
     text-decoration: none;
+    transition: color 0.15s;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
   }
-  .public-btn-primary:hover,
-  .primary-button:hover { background: #964d30; }
+  .nav-link:hover, .nav-link.active {
+    color: #1C1C1A;
+    border-bottom-color: #1C1C1A;
+  }
 
-  .public-btn-secondary,
-  .secondary-button {
+  /* ─── Badges ─────────────────────────────────── */
+  .badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid #e8dfc8;
-    background: #fff;
-    padding: 12px 24px;
-    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #D4C9B8;
+    background: #F5F0E8;
+    padding: 3px 8px;
+    font-size: 10px;
     font-weight: 600;
-    color: #1a1612;
-    cursor: pointer;
-    transition: background 0.15s;
-    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #5A5248;
   }
-  .public-btn-secondary:hover,
-  .secondary-button:hover { background: #faf6ee; }
 
-  .public-btn-subtle,
-  .ghost-button {
+  .label-category {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9A8F82;
+  }
+
+  /* ─── Buttons ────────────────────────────────── */
+  .btn-dark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9999px;
-    padding: 8px 16px;
-    font-size: 14px;
+    background: #1C1C1A;
+    color: #FFFFFF;
+    border: 1px solid #1C1C1A;
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 13px;
     font-weight: 500;
-    color: #5a4a3a;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .btn-dark:hover { background: #3A3A36; border-color: #3A3A36; }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
-    border: none;
+    color: #1C1C1A;
+    border: 1px solid #1C1C1A;
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     cursor: pointer;
-    transition: background 0.15s;
     text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
   }
-  .public-btn-subtle:hover,
-  .ghost-button:hover { background: #f2e8d4; }
+  .btn-outline:hover { background: #F0EBE3; }
 
-  .public-btn-icon {
+  .btn-outline-white {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid #e8dfc8;
-    background: #fff;
+    background: transparent;
+    color: #FFFFFF;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 100px;
+    padding: 14px 32px;
     font-size: 14px;
-    font-weight: 600;
-    color: #1a1612;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     cursor: pointer;
+    text-decoration: none;
     transition: background 0.15s;
   }
-  .public-btn-icon:hover { background: #faf6ee; }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.12); }
 
+  .btn-hero-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #1C1C1A;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    padding: 16px 36px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .btn-hero-dark:hover { background: #3A3A36; }
+
+  /* ─── Product card ───────────────────────────── */
+  .product-card {
+    background: #FFFFFF;
+    border: 1px solid #EDE7DE;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .product-card:hover {
+    box-shadow: 0 8px 32px rgba(28,28,26,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* ─── Section label ──────────────────────────── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9A8F82;
+    margin-bottom: 10px;
+  }
+
+  /* ─── Forms ──────────────────────────────────── */
   .input-field {
     width: 100%;
-    border-radius: 16px;
-    border: 1px solid #e8dfc8;
-    background: #fff;
-    padding: 12px 16px;
+    border: 1px solid #DDD7CE;
+    border-radius: 8px;
+    background: #FFFFFF;
+    padding: 11px 14px;
     font-size: 14px;
-    color: #1a1612;
+    color: #1C1C1A;
     outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
     font-family: inherit;
+    transition: border-color 0.15s;
   }
-  .input-field:focus {
-    border-color: #b05c3a;
-    box-shadow: 0 0 0 3px rgba(176,92,58,0.12);
-  }
-  .input-field::placeholder { color: #a09080; }
+  .input-field:focus { border-color: #1C1C1A; }
+  .input-field::placeholder { color: #B0A898; }
 
   .label-text {
     display: block;
     margin-bottom: 6px;
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #7a6a58;
+    color: #7A7268;
+  }
+
+  /* ─── Panel (owner / cart) ───────────────────── */
+  .panel-surface {
+    background: #FFFFFF;
+    border: 1px solid #EDE7DE;
+    border-radius: 16px;
+  }
+
+  /* ─── Legacy compat ──────────────────────────── */
+  .public-btn-primary, .primary-button {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #1C1C1A; color: #fff; border: 1px solid #1C1C1A;
+    border-radius: 100px; padding: 11px 22px; font-size: 13px;
+    font-weight: 500; cursor: pointer; text-decoration: none; transition: background 0.15s;
+  }
+  .public-btn-primary:hover, .primary-button:hover { background: #3A3A36; }
+
+  .public-btn-secondary, .secondary-button {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: #1C1C1A; border: 1px solid #1C1C1A;
+    border-radius: 100px; padding: 11px 22px; font-size: 13px;
+    font-weight: 500; cursor: pointer; text-decoration: none; transition: background 0.15s;
+  }
+  .public-btn-secondary:hover, .secondary-button:hover { background: #F0EBE3; }
+
+  .public-btn-subtle, .ghost-button {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: #5A5248; border: none;
+    border-radius: 100px; padding: 8px 14px; font-size: 13px;
+    font-weight: 500; cursor: pointer; text-decoration: none; transition: background 0.15s;
+  }
+  .public-btn-subtle:hover, .ghost-button:hover { background: #F0EBE3; }
+
+  .public-btn-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #fff; color: #1C1C1A; border: 1px solid #DDD7CE;
+    border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .public-btn-icon:hover { background: #F5F0E8; }
+
+  .pill-badge {
+    display: inline-flex; align-items: center; border-radius: 4px;
+    background: #F5F0E8; padding: 4px 10px; font-size: 10px;
+    font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #7A6A58;
+  }
+
+  .product-badge {
+    display: inline-flex; align-items: center; border-radius: 4px;
+    border: 1px solid #D4C9B8; background: #F5F0E8; padding: 3px 8px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #5A5248;
+  }
+
+  .section-shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 2rem;
   }
 
   .shadow-card {
-    box-shadow: 0 8px 40px -8px rgba(80,50,20,0.18), 0 2px 8px -2px rgba(80,50,20,0.08);
+    box-shadow: 0 8px 32px rgba(28,28,26,0.1);
   }
 }
 

@@ -10,15 +10,16 @@ export default function LangSwitcher() {
   const { locale, setLocale } = useLangStore()
 
   return (
-    <div className="flex items-center gap-1 rounded-full border border-[#e8dfc8] bg-white px-1 py-1">
+    <div className="flex items-center gap-0.5 rounded-full border border-[#DDD7CE] bg-white px-1 py-1">
       {LANGS.map(({ code, label }) => (
         <button
           key={code}
           onClick={() => setLocale(code)}
-          className="rounded-full px-2.5 py-1 text-xs font-semibold transition"
+          className="rounded-full px-2 py-0.5 text-[11px] font-semibold transition"
           style={{
-            background: locale === code ? '#b05c3a' : 'transparent',
-            color: locale === code ? '#fff' : '#5a4a3a',
+            background: locale === code ? '#1C1C1A' : 'transparent',
+            color: locale === code ? '#fff' : '#7A7268',
+            letterSpacing: '0.05em',
           }}
         >
           {label}

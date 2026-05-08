@@ -1,12 +1,49 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useProductStore } from '../stores/productStore'
-import { useLangStore } from '../stores/langStore'
+import { useCartStore } from '../stores/cartStore'
 import { formatPrice } from '../lib/whatsapp'
 import { getProductImage } from '../lib/products'
 
+function ProductCard({ product }) {
+  const addItem = useCartStore((s) => s.addItem)
+  return (
+    <div className="product-card">
+      <div className="overflow-hidden bg-[#F5F0E8]" style={{ aspectRatio: '4/3' }}>
+        <img
+          src={getProductImage(product)}
+          alt={product.name}
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
+      <div className="p-4 space-y-2.5">
+        <div className="flex flex-wrap gap-1.5">
+          {product.isHandmade && <span className="badge">Fait main</span>}
+          {product.isPremium && <span className="badge">Premium</span>}
+        </div>
+        <p className="label-category">{product.category?.toUpperCase()}</p>
+        <h3 className="text-[17px] leading-snug" style={{ fontFamily: "'Playfair Display', serif" }}>
+          {product.name}
+        </h3>
+        <p className="text-[13px] leading-relaxed line-clamp-2" style={{ color: '#7A7268' }}>{product.description}</p>
+        <div className="flex items-end justify-between pt-1">
+          <p className="text-[15px] font-semibold">{formatPrice(product.price)}</p>
+          <p className="text-[11px]" style={{ color: '#9A8F82' }}>Marrakech Médina</p>
+        </div>
+        <div className="flex gap-2 pt-1">
+          <button onClick={() => addItem(product)} className="btn-dark flex-1 py-2.5 text-[12px]">
+            Ajouter au panier
+          </button>
+          <Link to={`/products/${product.id}`} className="btn-outline px-4 py-2.5 text-[12px]">
+            Voir la fiche
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function CatalogPage() {
-  const t = useLangStore((s) => s.t)
   const products = useProductStore((s) => s.products)
   const loadProducts = useProductStore((s) => s.loadProducts)
   const [search, setSearch] = useState('')
@@ -22,59 +59,62 @@ export default function CatalogPage() {
   })
 
   return (
-    <section className="section-shell pb-16">
-      <div className="mb-6">
-        <span className="pill-badge">{t('nav.catalog')}</span>
-        <h1 className="mt-4 text-4xl" style={{ color: '#1a1612' }}>Catalogue</h1>
+    <div style={{ background: '#FAF7F2', minHeight: '100vh' }}>
+      {/* Page header */}
+      <div className="border-b border-[#E8E0D4] bg-white py-10 text-center">
+        <p className="section-label">Boutique</p>
+        <h1 className="mt-2 text-[40px] font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
+          Nos Collections
+        </h1>
+        <p className="mt-2 text-[14px]" style={{ color: '#9A8F82' }}>
+          Artisanat marocain authentique, sélectionné à Marrakech
+        </p>
       </div>
 
-      {/* Filters */}
-      <div className="mb-6 flex flex-wrap gap-3">
-        <input
-          type="search"
-          className="input-field max-w-xs"
-          placeholder="Rechercher…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <select className="input-field max-w-[200px]" value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Toutes catégories</option>
-          {categories.map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-        {(search || category) && (
-          <button className="public-btn-subtle" onClick={() => { setSearch(''); setCategory('') }}>
-            Effacer les filtres
-          </button>
-        )}
-      </div>
+      <div className="container-xl py-8">
+        {/* Filters */}
+        <div className="mb-8 flex flex-wrap gap-3 items-center">
+          <input
+            type="search"
+            className="input-field"
+            style={{ maxWidth: 260 }}
+            placeholder="Rechercher un produit…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setCategory('')}
+              className={`text-[12px] font-medium rounded-full px-4 py-2 border transition ${!category ? 'bg-[#1C1C1A] text-white border-[#1C1C1A]' : 'border-[#DDD7CE] text-[#5A5248] hover:bg-[#F0EBE3]'}`}
+            >
+              Tout
+            </button>
+            {categories.map((c) => (
+              <button
+                key={c}
+                onClick={() => setCategory(c === category ? '' : c)}
+                className={`text-[12px] font-medium rounded-full px-4 py-2 border transition ${category === c ? 'bg-[#1C1C1A] text-white border-[#1C1C1A]' : 'border-[#DDD7CE] text-[#5A5248] hover:bg-[#F0EBE3]'}`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {filtered.map((product) => (
-          <Link key={product.id} to={`/products/${product.id}`} className="panel-surface group block overflow-hidden transition hover:-translate-y-1 hover:shadow-card">
-            <div className="overflow-hidden" style={{ background: '#faf6ee', borderRadius: '26px 26px 0 0' }}>
-              <img src={getProductImage(product)} alt={product.name} className="h-48 w-full object-cover transition group-hover:scale-105" />
-            </div>
-            <div className="p-4">
-              <div className="flex flex-wrap gap-1 mb-2">
-                {product.isHandmade && <span className="product-badge">{t('product.handmade')}</span>}
-                {product.isPremium && <span className="product-badge">{t('product.premium')}</span>}
-              </div>
-              <h3 className="text-base font-semibold leading-snug" style={{ color: '#1a1612' }}>{product.name}</h3>
-              <p className="mt-1 text-xs" style={{ color: '#7a6a58' }}>{product.category}</p>
-              <p className="mt-2 text-lg font-semibold" style={{ color: '#b05c3a' }}>{formatPrice(product.price)}</p>
-              {product.stock <= 0 && (
-                <p className="mt-1 text-xs" style={{ color: '#a09080' }}>{t('product.on_order')}</p>
-              )}
-            </div>
-          </Link>
-        ))}
+        {/* Grid */}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
+        </div>
 
-        {filtered.length === 0 && (
-          <div className="col-span-full panel-surface px-8 py-14 text-center">
-            <p className="text-xl font-semibold" style={{ color: '#1a1612' }}>Aucun produit trouvé.</p>
+        {!filtered.length && (
+          <div className="py-20 text-center">
+            <p className="text-[20px] font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Aucun produit trouvé.</p>
+            <button onClick={() => { setSearch(''); setCategory('') }} className="btn-outline mt-4">
+              Effacer les filtres
+            </button>
           </div>
         )}
       </div>
-    </section>
+    </div>
   )
 }
