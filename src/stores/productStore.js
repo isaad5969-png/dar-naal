@@ -1,6 +1,5 @@
 import { create } from 'zustand'
-import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../lib/firebase'
+import { db, isFirebaseConfigured } from '../lib/firebase'
 
 const COLLECTION = 'products'
 
@@ -34,7 +33,12 @@ export const useProductStore = create((set, get) => ({
   loadProducts: async () => {
     if (get().isLoading) return get().products
     set({ isLoading: true })
+    if (!isFirebaseConfigured) {
+      set({ products: SEED_PRODUCTS, hasLoaded: true, isLoading: false })
+      return SEED_PRODUCTS
+    }
     try {
+      const { collection, getDocs } = await import('firebase/firestore')
       const snap = await getDocs(collection(db, COLLECTION))
       if (snap.empty) {
         set({ products: SEED_PRODUCTS, hasLoaded: true, isLoading: false })
@@ -51,15 +55,21 @@ export const useProductStore = create((set, get) => ({
 
   saveProduct: async (data) => {
     const id = data.id || data.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-    const product = normalize({ ...data, updatedAt: serverTimestamp() }, id)
-    await setDoc(doc(db, COLLECTION, id), product)
+    const product = normalize({ ...data }, id)
+    if (isFirebaseConfigured && db) {
+      const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
+      await setDoc(doc(db, COLLECTION, id), { ...product, updatedAt: serverTimestamp() })
+    }
     const products = get().products.filter((p) => p.id !== id)
     set({ products: [...products, product] })
     return product
   },
 
   deleteProduct: async (id) => {
-    await deleteDoc(doc(db, COLLECTION, id))
+    if (isFirebaseConfigured && db) {
+      const { doc, deleteDoc } = await import('firebase/firestore')
+      await deleteDoc(doc(db, COLLECTION, id))
+    }
     set({ products: get().products.filter((p) => p.id !== id) })
   },
 }))

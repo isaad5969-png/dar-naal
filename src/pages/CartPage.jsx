@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../lib/firebase'
+import { db, isFirebaseConfigured } from '../lib/firebase'
 import { useCartStore } from '../stores/cartStore'
 import { useProductStore } from '../stores/productStore'
 import { useNotifStore } from '../stores/notifStore'
@@ -21,12 +20,18 @@ async function saveOrder(data, items) {
     formData: data,
     total: Number(data.total ?? 0),
     items: items.map((i) => ({ productId: i.productId, name: i.name, price: Number(i.price ?? 0), image: i.image ?? '', quantity: Number(i.quantity ?? 1), category: i.category ?? '', origin: i.origin ?? '' })),
-    createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp(),
     status: 'pending',
   }
-  const ref = await addDoc(collection(db, 'orders'), order)
-  return { id: ref.id, ...order, reference }
+  // Sauvegarde dans Firebase uniquement si configuré
+  if (isFirebaseConfigured && db) {
+    const { collection, addDoc, serverTimestamp } = await import('firebase/firestore')
+    order.createdAt = serverTimestamp()
+    order.updatedAt = serverTimestamp()
+    const ref = await addDoc(collection(db, 'orders'), order)
+    return { id: ref.id, ...order, reference }
+  }
+  // Mode sans Firebase : on retourne la commande locale
+  return { id: `local-${Date.now()}`, ...order, reference }
 }
 
 export default function CartPage() {

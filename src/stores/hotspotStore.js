@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../lib/firebase'
+import { db, isFirebaseConfigured } from '../lib/firebase'
 
 const COLLECTION = 'hotspots'
 
@@ -39,7 +38,12 @@ export const useHotspotStore = create(
       loadHotspots: async () => {
         if (get().isLoading) return get().hotspots
         set({ isLoading: true })
+        if (!isFirebaseConfigured) {
+          set({ hotspots: DEFAULT_HOTSPOTS, hasLoaded: true, isLoading: false })
+          return DEFAULT_HOTSPOTS
+        }
         try {
+          const { collection, getDocs } = await import('firebase/firestore')
           const snap = await getDocs(collection(db, COLLECTION))
           if (snap.empty) {
             set({ hotspots: DEFAULT_HOTSPOTS, hasLoaded: true, isLoading: false })
@@ -49,8 +53,8 @@ export const useHotspotStore = create(
           set({ hotspots, hasLoaded: true, isLoading: false })
           return hotspots
         } catch {
-          set({ hasLoaded: true, isLoading: false })
-          return get().hotspots
+          set({ hotspots: DEFAULT_HOTSPOTS, hasLoaded: true, isLoading: false })
+          return DEFAULT_HOTSPOTS
         }
       },
 
@@ -58,7 +62,10 @@ export const useHotspotStore = create(
         const hotspots = get().hotspots
         const id = data.id || genId(hotspots)
         const hs = normalize({ ...data }, id)
-        await setDoc(doc(db, COLLECTION, id), { ...hs, createdAt: serverTimestamp() })
+        if (isFirebaseConfigured && db) {
+          const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
+          await setDoc(doc(db, COLLECTION, id), { ...hs, createdAt: serverTimestamp() })
+        }
         set({ hotspots: [...hotspots.filter((h) => h.id !== id), hs] })
         return hs
       },
@@ -66,7 +73,10 @@ export const useHotspotStore = create(
       updateHotspot: async (id, updates) => {
         const existing = get().hotspots.find((h) => h.id === id) ?? { id }
         const hs = normalize({ ...existing, ...updates }, id)
-        await setDoc(doc(db, COLLECTION, id), { ...hs, updatedAt: serverTimestamp() }, { merge: true })
+        if (isFirebaseConfigured && db) {
+          const { doc, setDoc, serverTimestamp } = await import('firebase/firestore')
+          await setDoc(doc(db, COLLECTION, id), { ...hs, updatedAt: serverTimestamp() }, { merge: true })
+        }
         set({ hotspots: get().hotspots.map((h) => h.id === id ? hs : h) })
         return hs
       },
@@ -82,7 +92,10 @@ export const useHotspotStore = create(
       },
 
       deleteHotspot: async (id) => {
-        await deleteDoc(doc(db, COLLECTION, id))
+        if (isFirebaseConfigured && db) {
+          const { doc, deleteDoc } = await import('firebase/firestore')
+          await deleteDoc(doc(db, COLLECTION, id))
+        }
         set({ hotspots: get().hotspots.filter((h) => h.id !== id) })
       },
     }),
