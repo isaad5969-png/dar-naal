@@ -1,0 +1,17 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="56" fill="#F9F2E7"/>
+  <rect x="72" y="72" width="1056" height="756" rx="42" fill="url(#bg)"/>
+  <rect x="510" y="220" width="180" height="420" rx="90" fill="#D9A93A"/>
+  <rect x="548" y="178" width="104" height="108" rx="24" fill="#7A4B22"/>
+  <path d="M548 430C548 390 572 362 600 362C628 362 652 390 652 430C652 470 628 510 600 510C572 510 548 470 548 430Z" fill="#F3D48A" fill-opacity="0.8"/>
+  <circle cx="340" cy="598" r="58" fill="#4F7A5C" fill-opacity="0.3"/>
+  <circle cx="874" cy="278" r="82" fill="#F3D48A" fill-opacity="0.75"/>
+  <text x="128" y="160" fill="#4A352B" font-family="Georgia, serif" font-size="42" font-weight="700">Huile d’argan premium</text>
+  <text x="128" y="214" fill="#7B6455" font-family="Arial, sans-serif" font-size="26">Bien-être • Agadir</text>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="120" x2="1060" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F3"/>
+      <stop offset="1" stop-color="#E8D8C2"/>
+    </linearGradient>
+  </defs>
+</svg>

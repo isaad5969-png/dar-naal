@@ -1,0 +1,16 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="56" fill="#F8F1E6"/>
+  <rect x="72" y="72" width="1056" height="756" rx="42" fill="url(#bg)"/>
+  <rect x="360" y="332" width="480" height="310" rx="48" fill="#A86A3C"/>
+  <path d="M450 356C450 270 517 200 600 200C683 200 750 270 750 356" stroke="#7A4B22" stroke-width="28" stroke-linecap="round"/>
+  <rect x="410" y="408" width="380" height="170" rx="32" fill="#D8A36D" fill-opacity="0.4"/>
+  <circle cx="600" cy="492" r="32" fill="#F3D48A"/>
+  <text x="128" y="160" fill="#4A352B" font-family="Georgia, serif" font-size="42" font-weight="700">Sac cuir Marrakech</text>
+  <text x="128" y="214" fill="#7B6455" font-family="Arial, sans-serif" font-size="26">Maroquinerie • Marrakech</text>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="120" x2="1060" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8F2"/>
+      <stop offset="1" stop-color="#E7D2BC"/>
+    </linearGradient>
+  </defs>
+</svg>

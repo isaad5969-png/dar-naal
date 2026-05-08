@@ -1,0 +1,17 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="56" fill="#F6EFE5"/>
+  <rect x="72" y="72" width="1056" height="756" rx="42" fill="url(#bg)"/>
+  <path d="M600 240L700 320V585L600 670L500 585V320L600 240Z" fill="#B8742D"/>
+  <path d="M560 324H640V586H560V324Z" fill="#D9A93A" fill-opacity="0.9"/>
+  <path d="M600 276C642 276 676 242 676 200H648C648 227 627 248 600 248C573 248 552 227 552 200H524C524 242 558 276 600 276Z" fill="#7A4B22"/>
+  <path d="M560 360L600 400L640 360M560 456L600 496L640 456" stroke="#F9E8A6" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="902" cy="232" r="96" fill="#F3D48A" fill-opacity="0.8"/>
+  <text x="128" y="160" fill="#4A352B" font-family="Georgia, serif" font-size="42" font-weight="700">Lanterne cuivre artisanale</text>
+  <text x="128" y="214" fill="#7B6455" font-family="Arial, sans-serif" font-size="26">Décoration • Marrakech</text>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="120" x2="1060" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8F1"/>
+      <stop offset="1" stop-color="#EED5B6"/>
+    </linearGradient>
+  </defs>
+</svg>

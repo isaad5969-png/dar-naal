@@ -1,0 +1,16 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="56" fill="#F7F1E7"/>
+  <rect x="72" y="72" width="1056" height="756" rx="42" fill="url(#bg)"/>
+  <path d="M410 330H520L500 610H430L410 330Z" fill="#7CB3B0" fill-opacity="0.55"/>
+  <path d="M560 300H680L655 610H585L560 300Z" fill="#8FD0CB" fill-opacity="0.55"/>
+  <path d="M740 350H850L832 610H758L740 350Z" fill="#7CB3B0" fill-opacity="0.55"/>
+  <circle cx="915" cy="232" r="92" fill="#F3D48A" fill-opacity="0.8"/>
+  <text x="128" y="160" fill="#4A352B" font-family="Georgia, serif" font-size="42" font-weight="700">Verres beldi</text>
+  <text x="128" y="214" fill="#7B6455" font-family="Arial, sans-serif" font-size="26">Art de table • Casablanca</text>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="120" x2="1060" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F2"/>
+      <stop offset="1" stop-color="#E0E9E5"/>
+    </linearGradient>
+  </defs>
+</svg>

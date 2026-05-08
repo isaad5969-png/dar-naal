@@ -1,0 +1,17 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="56" fill="#F7F0E7"/>
+  <rect x="72" y="72" width="1056" height="756" rx="42" fill="url(#bg)"/>
+  <rect x="348" y="248" width="504" height="404" rx="90" fill="#F1DFC8" stroke="#B85E3D" stroke-width="22"/>
+  <path d="M600 332L660 392L600 452L540 392L600 332Z" fill="#D95B35"/>
+  <path d="M600 448L660 508L600 568L540 508L600 448Z" fill="#D9A93A"/>
+  <path d="M456 448L516 508L456 568L396 508L456 448Z" fill="#4F7A5C"/>
+  <path d="M744 448L804 508L744 568L684 508L744 448Z" fill="#4F7A5C"/>
+  <text x="128" y="160" fill="#4A352B" font-family="Georgia, serif" font-size="42" font-weight="700">Coussin brodé marocain</text>
+  <text x="128" y="214" fill="#7B6455" font-family="Arial, sans-serif" font-size="26">Textile • Fès</text>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="120" x2="1060" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F4"/>
+      <stop offset="1" stop-color="#EBD9CB"/>
+    </linearGradient>
+  </defs>
+</svg>

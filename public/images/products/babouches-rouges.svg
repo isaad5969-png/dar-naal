@@ -1,0 +1,15 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="56" fill="#F8EFE6"/>
+  <rect x="72" y="72" width="1056" height="756" rx="42" fill="url(#bg)"/>
+  <path d="M310 560C310 445 401 360 515 360H700C765 360 818 413 818 478C818 530 786 576 739 595L620 644C566 666 502 652 462 609L356 495" fill="#A6322E" fill-opacity="0.95"/>
+  <path d="M430 584C430 506 491 442 569 442H691C733 442 767 476 767 518C767 550 747 578 717 590L632 625C590 642 542 631 512 598L430 508" fill="#D95B35"/>
+  <circle cx="928" cy="228" r="86" fill="#F3D48A" fill-opacity="0.85"/>
+  <text x="128" y="160" fill="#4A352B" font-family="Georgia, serif" font-size="42" font-weight="700">Babouches cuir rouge</text>
+  <text x="128" y="214" fill="#7B6455" font-family="Arial, sans-serif" font-size="26">Maroquinerie • Marrakech</text>
+  <defs>
+    <linearGradient id="bg" x1="104" y1="120" x2="1060" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8F1"/>
+      <stop offset="1" stop-color="#F2E0CE"/>
+    </linearGradient>
+  </defs>
+</svg>
